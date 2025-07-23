@@ -1,0 +1,533 @@
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio of ItzClues, a Discord developer and student from Pakistan specializing in server setup and moderation.">
+    <meta name="keywords" content="Discord developer, ItzClues, web development, server moderation">
+    <title>ItzClues - Home</title>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto:wght@400&family=Montserrat:wght@600&display=swap" as="style" onload="this.rel='stylesheet'">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            scroll-behavior: smooth;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(44, 44, 84, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #00ddeb;
+            transform: scale(1.1);
+        }
+
+        nav a.active {
+            color: #00ddeb;
+            border-bottom: 2px solid #00ddeb;
+        }
+
+        /* Intro Section */
+        .intro {
+            height: 100vh;
+            background: linear-gradient(rgba(44, 44, 84, 0.7), rgba(0, 221, 235, 0.7)), 
+                        url('https://img.freepik.com/free-vector/hand-drawn-school-supplies-pattern-background_23-2150855728.jpg?semt=ais_hybrid&w=740') no-repeat center center/cover, #2c2c54;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+            padding: 2rem;
+            animation: fadeIn 1.5s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .intro h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .intro p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 1.5rem;
+            color: #fff;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .intro img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 1rem 0;
+            border: 3px solid #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #fff;
+        }
+
+        .hire-button {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: #ffffff;
+            color: #0059ff;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            border-radius: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hire-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 15px rgba(0, 221, 235, 0.7);
+        }
+
+        /* Work Section */
+        .work {
+            padding: 4rem 2rem;
+            background: linear-gradient(rgba(56, 46, 46, 0.9), rgba(5, 169, 219, 0.9)), #0000ff;
+            background-image: url('https://img.freepik.com/free-photo/high-angle-view-laptop-stationeries-blue-background_23-2147880456.jpg?semt=ais_hybrid&w=740');
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .work h2 {
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #2e2e3f;
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        .work h2.visible {
+            animation: scaleIn 0.8s ease-out forwards;
+        }
+
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .work-card {
+            background-color: #f4f4f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            transform: translateY(50px);
+            position: relative;
+            z-index: 1;
+        }
+
+        .work-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .work-card:hover {
+            transform: translateY(-10px) rotate(2deg);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .work-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            width: calc(100% + 4px);
+            height: calc(100% + 4px);
+            border-radius: 8px;
+            border: 2px solid transparent;
+            transition: border 0.3s ease;
+            z-index: -1;
+        }
+
+        .work-card:hover::before {
+            border: 2px solid transparent;
+            background: linear-gradient(45deg, #00ddeb, #2c2c54);
+            background-clip: border-box;
+            -webkit-background-clip: border-box;
+        }
+
+        .work-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: #2c2c54;
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .work-card p {
+            position: relative;
+            color: #333;
+        }
+
+        /* About Section */
+        .about {
+            padding: 4rem 2rem;
+            background-color: #2c2c54;
+            color: #fff;
+            text-align: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .about h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        .about h2.visible {
+            animation: scaleIn 0.8s ease-out forwards;
+        }
+
+        .about p {
+            max-width: 600px;
+            margin: 0 auto 1rem;
+        }
+
+        .about ul {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .about li {
+            margin: 0.5rem 0;
+            font-weight: bold;
+        }
+
+        /* Hire Me Section */
+        .hire-me {
+            padding: 4rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: #fff;
+        }
+
+        .hire-me h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            color: #2c2c54;
+            text-align: center;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        .hire-me h2.visible {
+            animation: scaleIn 0.8s ease-out forwards;
+        }
+
+        .hire-me p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 1.5rem;
+            text-align: center;
+            color: #333;
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .service-card {
+            background-color: #f4f4f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: #2c2c54;
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .service-card p {
+            position: relative;
+            color: #333;
+        }
+
+        .contact-button {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(45deg, #00ddeb, #2c2c54);
+            color: #fff;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            border-radius: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 15px rgba(0, 221, 235, 0.7);
+        }
+
+        /* Footer */
+        footer {
+            background: #2c2c54;
+            color: #fff;
+            text-align: center;
+            padding: 1.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: #00ddeb;
+            text-decoration: none;
+            margin: 0 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #fff;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .intro h1 {
+                font-size: 2.5rem;
+            }
+
+            .intro p {
+                font-size: 1rem;
+            }
+
+            .intro img {
+                width: 120px;
+                height: 120px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .work-grid, .services {
+                grid-template-columns: 1fr;
+            }
+
+            .hire-button, .contact-button {
+                padding: 0.6rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav data-aos="fade-down">
+        <ul>
+            <li><a href="#intro" aria-label="Go to Intro section">Intro</a></li>
+            <li><a href="#work" aria-label="Go to Work section">Work</a></li>
+            <li><a href="#about" aria-label="Go to About section">About</a></li>
+            <li><a href="#hire-me" aria-label="Go to Hire Me section">Hire Me</a></li>
+        </ul>
+    </nav>
+
+    <section id="intro" class="intro" data-aos="fade-up">
+        <h1>ItzClues</h1>
+        <p>Hey! I'm ItzClues, a student and a passionate Discord developer. I love working on digital communities, moderating servers, and learning new things every day — both in school and online.</p>
+        <img src="https://media.discordapp.net/attachments/1346355657913270358/1397485676609404969/doraemon-dorayaki.gif?ex=6881e575&is=688093f5&hm=fad51d30483b8e2df926dcc0daf30c75ed11556d381bed2db937af177a2eaa09&=&width=242&height=182" alt="Doraemon with Dorayaki" loading="lazy">
+        <div class="social-links" data-aos="fade-up" data-aos-delay="200">
+            <a href="https://open.spotify.com/user/ItzClues" target="_blank" aria-label="Visit ItzClues on Spotify">Spotify</a>
+            <a href="https://www.youtube.com/@CluesEditsfr" target="_blank" aria-label="Visit ItzClues on YouTube">YouTube</a>
+        </div>
+        <a href="#hire-me" class="hire-button" data-aos="fade-up" data-aos-delay="300" aria-label="Go to Hire Me section">Hire Me</a>
+    </section>
+
+    <section id="work" class="work" data-aos="fade-up">
+        <h2 data-aos="fade-up">Work</h2>
+        <div class="work-grid">
+            <div class="work-card" data-aos="fade-up" data-aos-delay="100">
+                <h3>Craftorium — Moderator</h3>
+                <p>Moderating a growing Minecraft/Discord community.</p>
+            </div>
+            <div class="work-card" data-aos="fade-up" data-aos-delay="200">
+                <h3>Dark Official — Discord Dev</h3>
+                <p>Setup bots, roles, and server systems.</p>
+            </div>
+            <div class="work-card" data-aos="fade-up" data-aos-delay="300">
+                <h3>Landing Page Project</h3>
+                <p>Practiced HTML/CSS basics (learning phase).</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about" data-aos="fade-up">
+        <h2 data-aos="fade-up">About</h2>
+        <p data-aos="fade-up" data-aos-delay="100">I'm ItzClues, a Discord developer and mod from Pakistan, currently learning full-stack web development. I specialize in creating structured, clean, and user-friendly Discord servers — whether it’s gaming, reward-based, or community focused.</p>
+        <p data-aos="fade-up" data-aos-delay="200">Currently:</p>
+        <ul data-aos="fade-up" data-aos-delay="300">
+            <li>Discord Dev at <strong>Dark Official</strong></li>
+            <li>Moderator at <strong>Craftorium</strong></li>
+            <li>Admin at <strong>Mineking</strong></li>
+        </ul>
+        <p data-aos="fade-up" data-aos-delay="400">From organizing role systems to setting up bots and building smooth layouts — I aim to provide quality and functionality in everything I do. 💻✨</p>
+    </section>
+
+    <section id="hire-me" class="hire-me" data-aos="fade-up">
+        <h2 data-aos="fade-up">Hire Me for Your Discord Needs</h2>
+        <p data-aos="fade-up" data-aos-delay="100">With over one year of experience as a Discord developer, I specialize in building and managing Discord servers, offering services tailored to gaming, community, or reward-based projects. I create user-friendly, efficient, and engaging solutions to bring your community to life.</p>
+        <div class="services" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-card">
+                <h3>Discord Onboarding</h3>
+                <p>Welcome new members with a smooth, professional experience using customized onboarding flows. I set up welcome messages, role assignment systems, and introduction channels to make sure every user feels at home right from the start.</p>
+            </div>
+            <div class="service-card">
+                <h3>Server Setup & Configuration</h3>
+                <p>Design organized roles, channels, and permissions for a professional and user-friendly server.</p>
+            </div>
+            <div class="service-card">
+                <h3>Moderation Systems</h3>
+                <p>Implement robust moderation tools and systems to keep your community safe and engaging.</p>
+            </div>
+        </div>
+        <p data-aos="fade-up" data-aos-delay="300">Ready to get started? Send a hire request to <strong>itzclues</strong> on Discord to discuss your project!</p>
+        <a href="https://discord.com/users/itzclues" class="contact-button" data-aos="fade-up" data-aos-delay="400" target="_blank" aria-label="Contact ItzClues on Discord">Contact Me on Discord</a>
+    </section>
+
+    <footer data-aos="fade-up">
+        <p>Connect with me: 
+            <a href="https://discord.com/users/itzclues" target="_blank" aria-label="Contact ItzClues on Discord">Discord</a>
+        </p>
+        <p>© 2025 ItzClues. All rights reserved.</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+        });
+
+        // Animate work cards, service cards, and section headers on scroll
+        const workCards = document.querySelectorAll('.work-card, .service-card');
+        const sectionHeaders = document.querySelectorAll('.work h2, .about h2, .hire-me h2');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 200);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        workCards.forEach(card => observer.observe(card));
+        sectionHeaders.forEach(header => observer.observe(header));
+
+        // Highlight active navigation link
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav a');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 60) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
